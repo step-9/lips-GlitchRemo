@@ -10,21 +10,22 @@
   "Returns the result of x/y unless y is 0. Returns :infinite when y is 0"
   {:level :easy
    :use   '[if-not zero?]}
-  [x y])
+  [x y] (if-not (zero? y) (/ x y) :infinite))
 
 (defn harishchandra
   "Only returns truthy values as themselves.
   Falsy values(false and nil) return nil"
   {:level :easy
    :use   '[when-let]}
-  [x])
+  [x] (when-let [val x] val))
 
 (defn yudishtira
   "Only returns truthy values as themselves.
   Falsy values(false and nil) return :ashwathama"
   {:level :easy
    :use   '[if-let]}
-  [x])
+  ;; [x] (if x x :ashwathama))
+  [x] (if-let [val x] val :ashwathama))
 
 (defn duplicate-first
   "Returns coll with the first element duplicated.
@@ -32,7 +33,8 @@
   {:level      :easy
    :use        '[when-first concat]
    :alternates '[empty? seq? conj into]}
-  [coll])
+  ;; [coll] (when-first [first-val coll] (into coll [first-val])))
+  [coll] (when-first [first-val coll] (conj coll first-val)))
 
 (defn five-point-someone
   "Returns :chetan-bhagat if y is 5.
@@ -41,7 +43,11 @@
   Otherwise it returns :universe"
   {:level :easy
    :use   '[cond]}
-  [x y])
+  [x y] (cond 
+          (= y 5) :chetan-bhagat 
+          (= x 5) :satan-bhagat 
+          (> x y) :greece
+          :else :universe))
 
 (defn conditions-apply
   "Given a collection of any length, returns:
@@ -52,7 +58,13 @@
   {:level      :medium
    :use        '[condp filter]
    :alternates '[if cond]}
-  [coll])
+  [coll] )
+  ;;               (#(or (= 1 %) (= 3 %)) coll) '(1 3)
+  ;;               (#(or (= :a %) (= :b %) (= :c %)) coll) '(:a :b :c)
+  ;;               (#(or (= [2 3] %) (= [4 5] %)) coll) [[2 3] [4 5]]
+  ;;               (#(or (= 1 %) (= 3 %)) coll) '(1 3)))
+;; if (= (filter fn1 coll) 1) :do-this
+;; else-if (= (filter fn2 coll) 2) :do-that
 
 (defn repeat-and-truncate
   "Given coll and options to repeat and truncate
