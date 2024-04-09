@@ -58,13 +58,12 @@
   {:level      :medium
    :use        '[condp filter]
    :alternates '[if cond]}
-  [coll] )
-  ;;               (#(or (= 1 %) (= 3 %)) coll) '(1 3)
-  ;;               (#(or (= :a %) (= :b %) (= :c %)) coll) '(:a :b :c)
-  ;;               (#(or (= [2 3] %) (= [4 5] %)) coll) [[2 3] [4 5]]
-  ;;               (#(or (= 1 %) (= 3 %)) coll) '(1 3)))
-;; if (= (filter fn1 coll) 1) :do-this
-;; else-if (= (filter fn2 coll) 2) :do-that
+  [coll] (cond 
+              (= (filter #(or (= 1 %) (= 3 %)) coll) '(1 3)) :wonder-woman
+              (= (filter #(or (= :a %) (= :b %) (= :c %)) coll) '(:a :b :c)) :durga
+              (= (filter #(or (= [2 3] %) (= [4 5] %)) coll) '([2 3] [4 5])) :cleopatra
+              :else :tuntun
+         ))
 
 (defn repeat-and-truncate
   "Given coll and options to repeat and truncate
