@@ -4,20 +4,24 @@
   "Returns the result of x/y unless y is 0. Returns nil when y is 0"
   {:level :easy
    :use   '[when-not zero?]}
-  [x y] (when-not (zero? y) (/ x y)))
+  [x y] (when-not (zero? y) 
+          (/ x y)))
 
 (defn informative-divide
   "Returns the result of x/y unless y is 0. Returns :infinite when y is 0"
   {:level :easy
    :use   '[if-not zero?]}
-  [x y] (if-not (zero? y) (/ x y) :infinite))
+  [x y] (if-not (zero? y) 
+          (/ x y) 
+          :infinite))
 
 (defn harishchandra
   "Only returns truthy values as themselves.
   Falsy values(false and nil) return nil"
   {:level :easy
    :use   '[when-let]}
-  [x] (when-let [val x] val))
+  [x] (when-let [val x] 
+        val))
 
 (defn yudishtira
   "Only returns truthy values as themselves.
@@ -25,7 +29,9 @@
   {:level :easy
    :use   '[if-let]}
   ;; [x] (if x x :ashwathama))
-  [x] (if-let [val x] val :ashwathama))
+  [x] (if-let [val x] 
+        val 
+        :ashwathama))
 
 (defn duplicate-first
   "Returns coll with the first element duplicated.
@@ -34,7 +40,8 @@
    :use        '[when-first concat]
    :alternates '[empty? seq? conj into]}
   ;; [coll] (when-first [first-val coll] (into coll [first-val])))
-  [coll] (when-first [first-val coll] (conj coll first-val)))
+  [coll] (when-first [first-val coll] 
+           (conj coll first-val)))
 
 (defn five-point-someone
   "Returns :chetan-bhagat if y is 5.
@@ -58,10 +65,10 @@
   {:level      :medium
    :use        '[condp filter]
    :alternates '[if cond]}
-  [coll] (condp = (filter #(contains? #{1 3 :a :b :c [2 3] [4 5]} %) coll)
-                '(1 3) :wonder-woman
-                '(:a :b :c) :durga
-                '([2 3] [4 5]) :cleopatra
+  [coll] (condp = (filter #(#{1 3 :a :b :c [2 3] [4 5]} %) coll)
+                '[1 3] :wonder-woman
+                '[:a :b :c] :durga
+                '[[2 3] [4 5]] :cleopatra
                 :tuntun
            ))
 
