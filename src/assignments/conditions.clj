@@ -4,15 +4,15 @@
   "Returns the result of x/y unless y is 0. Returns nil when y is 0"
   {:level :easy
    :use   '[when-not zero?]}
-  [x y] (when-not (zero? y) 
+  [x y] (when-not (zero? y)
           (/ x y)))
 
 (defn informative-divide
   "Returns the result of x/y unless y is 0. Returns :infinite when y is 0"
   {:level :easy
    :use   '[if-not zero?]}
-  [x y] (if-not (zero? y) 
-          (/ x y) 
+  [x y] (if-not (zero? y)
+          (/ x y)
           :infinite))
 
 (defn harishchandra
@@ -50,11 +50,15 @@
   Otherwise it returns :universe"
   {:level :easy
    :use   '[cond]}
-  [x y] (cond 
-          (= y 5) :chetan-bhagat 
-          (= x 5) :satan-bhagat 
+  [x y] (cond
+          (= y 5) :chetan-bhagat
+          (= x 5) :satan-bhagat
           (> x y) :greece
           :else :universe))
+
+(defn subset?
+  [arr coll]
+  (= (filter (set arr) coll) arr))
 
 (defn conditions-apply
   "Given a collection of any length, returns:
@@ -65,12 +69,12 @@
   {:level      :medium
    :use        '[condp filter]
    :alternates '[if cond]}
-  [coll] (condp = (filter #(#{1 3 :a :b :c [2 3] [4 5]} %) coll)
-                '[1 3] :wonder-woman
-                '[:a :b :c] :durga
-                '[[2 3] [4 5]] :cleopatra
-                :tuntun
-           ))
+  [coll]
+  (condp subset? coll
+    [1 3] :wonder-woman
+    [:a :b :c] :durga
+    [[2 3] [4 5]] :cleopatra
+    :tuntun))
 
 (defn repeat-and-truncate
   "Given coll and options to repeat and truncate
@@ -80,9 +84,8 @@
   {:level :medium
    :use   '[cond->> concat take]}
   [coll rep? truncate? n] (cond->> coll
-                           rep? (concat coll)
-                           truncate? (take n) 
-                           ))
+                            rep? (concat coll)
+                            truncate? (take n)))
 
 (defn order-in-words
   "Given x, y and z, returns a vector consisting of
@@ -92,7 +95,10 @@
   (order-in-words 2 3 4) => [:z-greater-than-x]"
   {:level :easy
    :use   '[cond-> conj]}
-  [x y z])
+  [x y z] (cond-> []
+            (> x y) (conj :x-greater-than-y)
+            (> y z) (conj :y-greater-than-z)
+            (> z x) (conj :z-greater-than-x)))
 
 (defn zero-aliases
   "Given a zero-like value(0,[],(),#{},{}) should
