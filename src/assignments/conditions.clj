@@ -120,4 +120,12 @@
   \"\"  -> :empty-string"
   {:level :easy
    :use   '[case]}
-  [zero-like-value])
+  [zero-like-value]
+  (case zero-like-value
+    0     #__   :zero
+    []    #__   :empty
+    ()    #__   :empty
+    #{}   #__   :empty-map
+    {}    #__   :empty-set
+    ""    #__   :empty-string
+    :not-zero))
