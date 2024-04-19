@@ -4,24 +4,27 @@
   "Returns the result of x/y unless y is 0. Returns nil when y is 0"
   {:level :easy
    :use   '[when-not zero?]}
-  [x y] (when-not (zero? y)
-          (/ x y)))
+  [x y]
+  (when-not (zero? y)
+    (/ x y)))
 
 (defn informative-divide
   "Returns the result of x/y unless y is 0. Returns :infinite when y is 0"
   {:level :easy
    :use   '[if-not zero?]}
-  [x y] (if-not (zero? y)
-          (/ x y)
-          :infinite))
+  [x y]
+  (if-not (zero? y)
+    (/ x y)
+    :infinite))
 
 (defn harishchandra
   "Only returns truthy values as themselves.
   Falsy values(false and nil) return nil"
   {:level :easy
    :use   '[when-let]}
-  [x] (when-let [val x] 
-        val))
+  [x]
+  (when-let [val x]
+    val))
 
 (defn yudishtira
   "Only returns truthy values as themselves.
@@ -29,9 +32,10 @@
   {:level :easy
    :use   '[if-let]}
   ;; [x] (if x x :ashwathama))
-  [x] (if-let [val x] 
-        val 
-        :ashwathama))
+  [x]
+  (if-let [val x]
+    val
+    :ashwathama))
 
 (defn duplicate-first
   "Returns coll with the first element duplicated.
@@ -40,8 +44,9 @@
    :use        '[when-first concat]
    :alternates '[empty? seq? conj into]}
   ;; [coll] (when-first [first-val coll] (into coll [first-val])))
-  [coll] (when-first [first-val coll] 
-           (conj coll first-val)))
+  [coll]
+  (when-first [first-val coll]
+    (conj coll first-val)))
 
 (defn five-point-someone
   "Returns :chetan-bhagat if y is 5.
@@ -50,11 +55,12 @@
   Otherwise it returns :universe"
   {:level :easy
    :use   '[cond]}
-  [x y] (cond
-          (= y 5) :chetan-bhagat
-          (= x 5) :satan-bhagat
-          (> x y) :greece
-          :else :universe))
+  [x y]
+  (cond
+    (= y 5) :chetan-bhagat
+    (= x 5) :satan-bhagat
+    (> x y) :greece
+    :else :universe))
 
 (defn subset?
   [arr coll]
@@ -83,9 +89,10 @@
   (repeat-and-truncate (range 4) true true 6) => '(0 1 2 3 0 1)"
   {:level :medium
    :use   '[cond->> concat take]}
-  [coll rep? truncate? n] (cond->> coll
-                            rep? (concat coll)
-                            truncate? (take n)))
+  [coll rep? truncate? n]
+  (cond->> coll
+    rep? (concat coll)
+    truncate? (take n)))
 
 (defn order-in-words
   "Given x, y and z, returns a vector consisting of
@@ -95,10 +102,11 @@
   (order-in-words 2 3 4) => [:z-greater-than-x]"
   {:level :easy
    :use   '[cond-> conj]}
-  [x y z] (cond-> []
-            (> x y) (conj :x-greater-than-y)
-            (> y z) (conj :y-greater-than-z)
-            (> z x) (conj :z-greater-than-x)))
+  [x y z]
+  (cond-> []
+    (> x y) (conj :x-greater-than-y)
+    (> y z) (conj :y-greater-than-z)
+    (> z x) (conj :z-greater-than-x)))
 
 (defn zero-aliases
   "Given a zero-like value(0,[],(),#{},{}) should
