@@ -7,7 +7,28 @@
   {:level        :medium
    :use          '[loop recur]
    :dont-use     '[map]}
-  [f & colls])
+  [f & colls]
+  (println (nth colls 0))
+  (loop [return-coll []
+         coll (nth colls 0)
+         i 0]
+    (println return-coll coll i)
+    (if (= i (count coll))
+      return-coll
+      (recur (conj return-coll (f (coll i))) coll (inc i)))))
+
+([1 2] 0)
+(nth '(1 2) 0)
+(conj [1 2] 3)
+(count [1 2 3])
+(map' inc [1 2 3])
+(conj [] (inc ([1 2] 0)))
+(map inc [1 2])
+(loop [sum 0
+       n 1]
+  (if (> n 2)
+    sum
+    (recur (+ sum n) (inc n))))
 
 (defn filter'
   "Implement a non-lazy version of filter that accepts a
